@@ -1,0 +1,37 @@
+{
+  "name": "cortex-yearly-themes-api",
+  "version": "0.0.1",
+  "description": "A rest api for my take on the Cortex Yearly Themes.",
+  "main": "index.ts",
+  "scripts": {
+    "prepare": "husky install",
+    "test": "mocha",
+    "cz": "git-cz"
+  },
+  "author": "Francisco Llamosas Baptista",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "chai": "^4.3.6",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "^8.19.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.19",
+    "nyc": "^15.1.0",
+    "prettier": "^2.7.1",
+    "sinon": "^14.0.0",
+    "sinon-chai": "^3.7.0",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
