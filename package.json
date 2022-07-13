@@ -5,16 +5,21 @@
   "main": "src/index.ts",
   "scripts": {
     "prepare": "husky install",
-    "test": "mocha",
+    "test:unit": "nyc --reporter=text mocha --require ts-node/register --recursive './src/**/*.spec.ts'",
     "cz": "git-cz",
     "serve": "LOG_ERRORS=true nodemon src/index.ts"
   },
   "author": "Francisco Llamosas Baptista",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "uuid": "^8.3.2"
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.1",
+    "@types/uuid": "^8.3.4",
     "chai": "^4.3.6",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
