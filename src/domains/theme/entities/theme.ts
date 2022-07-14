@@ -1,17 +1,9 @@
+import { Theme, ThemeProps } from './theme.interface'
 import { PropValidationError } from '../../../shared/prop-validation'
 import { ThemeValidator } from './theme.validator.interface'
 import { v4 } from 'uuid'
 
-/**
- * The types prop for {@link Theme}.
- */
-export interface ThemeProps {
-    name: string
-    description: string
-    outcomes: string[]
-}
-
-export class Theme {
+export class CTheme implements Theme {
     private validator: ThemeValidator
     readonly id: string
     private _name: string
@@ -21,6 +13,7 @@ export class Theme {
     private _updatedAt: Date
     /**
      * Represents the Theme Entity.
+     * Implements the {@link Theme} interface.
      *
      * @param  {ThemeProps} props
      * @param  {string=uuid.v4} id
@@ -83,7 +76,7 @@ export class Theme {
      * Updates the current Theme with the given props and sets a new updatedAt date.
      * @param  {Partial<ThemeProps>} props
      */
-    update(props: Partial<ThemeProps>) {
+    update(props: Partial<ThemeProps>): void {
         const { valid, errors } = this.validator.validateUpdateProps(props)
         if (!valid)
             throw new PropValidationError('Invalid update Theme props', errors)

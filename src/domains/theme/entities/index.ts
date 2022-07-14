@@ -1,10 +1,11 @@
-import { Theme, ThemeProps } from './theme'
+import { Theme, ThemeProps } from './theme.interface'
+import { CTheme } from './theme'
 import { CThemeValidator } from './theme.validator'
 
 const themeValidator = new CThemeValidator()
 
 function makeTheme(props: ThemeProps): Theme {
-    return new Theme(themeValidator, props)
+    return new CTheme(themeValidator, props)
 }
 
 export default Object.freeze({ makeTheme })

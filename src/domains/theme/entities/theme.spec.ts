@@ -1,5 +1,6 @@
-import { Theme, ThemeProps } from './theme'
 import chai, { expect } from 'chai'
+import { CTheme } from './theme'
+import { ThemeProps } from './theme.interface'
 import { ThemeValidator } from './theme.validator.interface'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
@@ -16,7 +17,7 @@ describe('Theme Entity', () => {
             } as unknown as ThemeProps
 
             it('should throw a validation Error', () => {
-                expect(() => new Theme(themeValidator, props)).to.throw(
+                expect(() => new CTheme(themeValidator, props)).to.throw(
                     'Invalid create new Theme props',
                 )
             })
@@ -25,7 +26,7 @@ describe('Theme Entity', () => {
             const themeValidator = makePermissiveThemeValidator()
             const props: ThemeProps = generateMockThemeProps()
             it('should be created properly', () => {
-                const theme = new Theme(themeValidator, props)
+                const theme = new CTheme(themeValidator, props)
 
                 expect(theme.name).to.eq(
                     props.name,
@@ -50,7 +51,7 @@ describe('Theme Entity', () => {
         describe('on invalid props', () => {
             const themeValidator = makeRestrictiveUpdateThemeValidator()
             const oldProps: ThemeProps = generateMockThemeProps()
-            const theme = new Theme(themeValidator, oldProps)
+            const theme = new CTheme(themeValidator, oldProps)
             const newProps: ThemeProps = {
                 name: false,
                 description: 0,
@@ -67,13 +68,12 @@ describe('Theme Entity', () => {
             const themeValidator = makePermissiveThemeValidator()
             const oldProps: ThemeProps = generateMockThemeProps()
             describe('updating outcomes', () => {
-            const theme = new Theme(themeValidator, oldProps)
+                const theme = new CTheme(themeValidator, oldProps)
 
                 const newProps: Partial<ThemeProps> = {
                     outcomes: ['New Test Outcome 1', 'New Test Outcome 2'],
                 }
                 it('should update properly', async () => {
-
                     await setTimeout(() => {
                         theme.update(newProps)
 
@@ -102,14 +102,13 @@ describe('Theme Entity', () => {
                 })
             })
             describe('updating name and description', () => {
-            const theme = new Theme(themeValidator, oldProps)
+                const theme = new CTheme(themeValidator, oldProps)
 
                 const newProps: Partial<ThemeProps> = {
                     name: 'New Test Theme',
                     description: 'New Test description',
                 }
                 it('should update properly', async () => {
-
                     await setTimeout(() => {
                         theme.update(newProps)
 

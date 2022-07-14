@@ -1,6 +1,6 @@
 import { CThemeValidator } from './theme.validator'
 import { PropValidationResult } from '../../../shared/prop-validation'
-import { ThemeProps } from './theme'
+import { ThemeProps } from './theme.interface'
 import { expect } from 'chai'
 
 describe('CThemeValidator', () => {
