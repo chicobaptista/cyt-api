@@ -5,9 +5,9 @@
   "main": "src/index.ts",
   "scripts": {
     "prepare": "husky install",
-    "test:unit": "nyc --reporter=text mocha --require ts-node/register --recursive './src/**/*.spec.ts'",
+    "test:unit": "nyc --reporter=text mocha -r ts-node/register  -r tsconfig-paths/register  --recursive './src/**/*.spec.ts'",
     "cz": "git-cz",
-    "serve": "LOG_ERRORS=true nodemon src/index.ts"
+    "serve": "LOG_ERRORS=true nodemon -r ts-node/register  -r tsconfig-paths/register src/index.ts"
   },
   "author": "Francisco Llamosas Baptista",
   "license": "ISC",
@@ -41,6 +41,7 @@
     "sinon": "^14.0.0",
     "sinon-chai": "^3.7.0",
     "ts-node": "^10.8.2",
+    "tsconfig-paths": "^4.0.0",
     "typescript": "^4.7.4"
   },
   "config": {

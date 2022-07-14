@@ -1,6 +1,6 @@
-import { Theme, ThemeProps } from './theme.interface'
-import { CTheme } from './theme'
-import { CThemeValidator } from './theme.validator'
+import { Theme, ThemeProps } from '@theme/entities/theme.interface'
+import { CTheme } from '@theme/entities/theme'
+import { CThemeValidator } from '@theme/entities/theme.validator'
 
 const themeValidator = new CThemeValidator()
 

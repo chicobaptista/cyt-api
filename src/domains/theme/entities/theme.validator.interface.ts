@@ -1,4 +1,4 @@
-import { PropValidationResult } from '../../../shared/prop-validation'
+import { PropValidationResult } from '@shared/prop-validation'
 
 /* eslint-disable no-unused-vars */
 export interface ThemeValidator {

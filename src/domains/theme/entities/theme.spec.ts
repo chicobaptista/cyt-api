@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai'
-import { CTheme } from './theme'
-import { ThemeProps } from './theme.interface'
-import { ThemeValidator } from './theme.validator.interface'
+import { CTheme } from '@theme/entities/theme'
+import { ThemeProps } from '@theme/entities/theme.interface'
+import { ThemeValidator } from '@theme/entities/theme.validator.interface'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 chai.use(sinonChai)

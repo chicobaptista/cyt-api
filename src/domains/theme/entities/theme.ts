@@ -1,6 +1,6 @@
-import { Theme, ThemeProps } from './theme.interface'
-import { PropValidationError } from '../../../shared/prop-validation'
-import { ThemeValidator } from './theme.validator.interface'
+import { Theme, ThemeProps } from '@theme/entities/theme.interface'
+import { PropValidationError } from '@shared/prop-validation'
+import { ThemeValidator } from '@theme/entities/theme.validator.interface'
 import { v4 } from 'uuid'
 
 export class CTheme implements Theme {

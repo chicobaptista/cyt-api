@@ -1,5 +1,5 @@
-import { PropValidationResult } from '../../../shared/prop-validation'
-import { ThemeValidator } from './theme.validator.interface'
+import { PropValidationResult } from '@shared/prop-validation'
+import { ThemeValidator } from '@theme/entities/theme.validator.interface'
 
 export class CThemeValidator implements ThemeValidator {
     /**

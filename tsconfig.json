@@ -5,6 +5,10 @@
         "rootDir": "./",
         "esModuleInterop": true,
         "strictNullChecks": false,
-        "strictFunctionTypes": false
+        "strictFunctionTypes": false,
+        "paths": {
+            "@shared/*": ["./src/shared/*"],
+            "@theme/*": ["./src/domains/theme/*"]
+        }
     }
 }
