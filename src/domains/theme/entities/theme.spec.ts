@@ -3,6 +3,19 @@ import { expect } from 'chai'
 
 describe('Theme Entity', () => {
     describe('New Theme', () => {
+        describe('on invalid props', () => {
+            const props: ThemeProps = {
+                name: false,
+                description: 0,
+                outcomes: ['test', NaN],
+            } as unknown as ThemeProps
+
+            it('should throw a validation Error', () => {
+                expect(() => new Theme(props)).to.throw(
+                    'Invalid create new Theme props',
+                )
+            })
+        })
         it('should be created properly', () => {
             const props: ThemeProps = generateMockThemeProps()
             const theme = new Theme(props)
@@ -23,6 +36,21 @@ describe('Theme Entity', () => {
     })
 
     describe('Updated Theme', () => {
+        describe('on invalid props', () => {
+            const oldProps: ThemeProps = generateMockThemeProps()
+            const theme = new Theme(oldProps)
+            const newProps: ThemeProps = {
+                name: false,
+                description: 0,
+                outcomes: ['test', NaN],
+            } as unknown as ThemeProps
+
+            it('should throw a validation Error', () => {
+                expect(() => theme.update(newProps)).to.throw(
+                    'Invalid update Theme props',
+                )
+            })
+        })
         describe('updating outcomes', () => {
             it('should update properly', async () => {
                 const oldProps: ThemeProps = generateMockThemeProps()
