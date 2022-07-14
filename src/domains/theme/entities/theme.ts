@@ -91,24 +91,41 @@ export class Theme {
         this._updatedAt = new Date()
     }
 
+    /**
+     * @param  {any} nameProp
+     * @returns {Error|void} If name is not a string returns an Error.
+     */
     private validateNameProp(nameProp: any): Error | void {
         if (typeof nameProp !== 'string')
             return new Error('Name should be a string')
     }
 
+    /**
+     * @param  {any} descriptionProp
+     * @returns {Error|void} If description is not a string returns an Error.
+     */
     private validateDescriptionProp(descriptionProp: any): Error | void {
         if (typeof descriptionProp !== 'string')
             return new Error('Description should be a string')
     }
 
-    private validateOutcomesProp(outcomes: any): Error | void {
+    /**
+     * @param  {any} outcomesProp
+     * @returns {Error|void} If outcomes is not an array of strings returns an Error.
+     */
+    private validateOutcomesProp(outcomesProp: any): Error | void {
         if (
-            !Array.isArray(outcomes) ||
-            outcomes.some((o) => typeof o !== 'string')
+            !Array.isArray(outcomesProp) ||
+            outcomesProp.some((o) => typeof o !== 'string')
         )
             return new Error('Outcomes must be an array of strings')
     }
 
+    /**
+     * Validates all props for creating a new {@link Theme}
+     * @param  {any} props
+     * @returns PropValidationResult {@link PropValidationResult}
+     */
     private validateCreateProps(props: any): PropValidationResult {
         const errors = []
         const { name, description, outcomes } = props
@@ -129,6 +146,11 @@ export class Theme {
         }
     }
 
+    /**
+     * Validates partial props for updating a {@link Theme}
+     * @param  {any} props
+     * @returns PropValidationResult {@link PropValidationResult}
+     */
     private validateUpdateProps(props: any): PropValidationResult {
         const errors = []
         const { name, description, outcomes } = props
