@@ -1,15 +1,21 @@
 import chai, { expect } from 'chai'
+import {
+    makePermissiveThemeValidator,
+    makeRestrictiveCreateThemeValidator,
+    makeRestrictiveUpdateThemeValidator,
+} from './theme.validator.utils.spec'
 import { CTheme } from '@theme/entities/theme'
 import { ThemeProps } from '@theme/entities/theme.interface'
 import { ThemeValidator } from '@theme/entities/theme.validator.interface'
-import sinon from 'sinon'
+import { generateMockThemeProps } from './theme.utils.spec'
 import sinonChai from 'sinon-chai'
 chai.use(sinonChai)
 
-describe('Theme Entity', () => {
+describe('CTheme Entity', () => {
     describe('New Theme', () => {
         describe('on invalid props', () => {
-            const themeValidator = makeRestrictiveCreateThemeValidator()
+            const themeValidator: ThemeValidator =
+                makeRestrictiveCreateThemeValidator()
             const props: ThemeProps = {
                 name: false,
                 description: 0,
@@ -23,7 +29,8 @@ describe('Theme Entity', () => {
             })
         })
         describe('On valid props', () => {
-            const themeValidator = makePermissiveThemeValidator()
+            const themeValidator: ThemeValidator =
+                makePermissiveThemeValidator()
             const props: ThemeProps = generateMockThemeProps()
             it('should be created properly', () => {
                 const theme = new CTheme(themeValidator, props)
@@ -49,7 +56,8 @@ describe('Theme Entity', () => {
 
     describe('Updated Theme', () => {
         describe('on invalid props', () => {
-            const themeValidator = makeRestrictiveUpdateThemeValidator()
+            const themeValidator: ThemeValidator =
+                makeRestrictiveUpdateThemeValidator()
             const oldProps: ThemeProps = generateMockThemeProps()
             const theme = new CTheme(themeValidator, oldProps)
             const newProps: ThemeProps = {
@@ -139,50 +147,3 @@ describe('Theme Entity', () => {
         })
     })
 })
-
-function generateMockThemeProps(): ThemeProps {
-    return {
-        name: 'Test Theme',
-        description: 'Test description',
-        outcomes: ['Test Outcome 1', 'Test Outcome 2'],
-    }
-}
-
-function makePermissiveThemeValidator(): ThemeValidator {
-    return {
-        validateCreateProps: sinon.stub().returns({
-            valid: true,
-            errors: [],
-        }),
-        validateUpdateProps: sinon.stub().returns({
-            valid: true,
-            errors: [],
-        }),
-    }
-}
-
-function makeRestrictiveCreateThemeValidator(): ThemeValidator {
-    return {
-        validateCreateProps: sinon.stub().returns({
-            valid: false,
-            errors: [],
-        }),
-        validateUpdateProps: sinon.stub().returns({
-            valid: true,
-            errors: [],
-        }),
-    }
-}
-
-function makeRestrictiveUpdateThemeValidator(): ThemeValidator {
-    return {
-        validateCreateProps: sinon.stub().returns({
-            valid: true,
-            errors: [],
-        }),
-        validateUpdateProps: sinon.stub().returns({
-            valid: false,
-            errors: [],
-        }),
-    }
-}
