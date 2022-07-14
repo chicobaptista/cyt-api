@@ -24,20 +24,11 @@ export class Theme {
      */
     constructor(props: ThemeProps, id: string = v4()) {
         this.id = id
-        this._name = props.name
-        this._description = props.description
-        this._outcomes = props.outcomes
+        const { name, description, outcomes } = props
+        this._name = name
+        this._description = description
+        this._outcomes = outcomes
         this._createdAt = new Date()
-        this._updatedAt = new Date()
-    }
-    /**
-     * Updates the current Theme with the given props and sets a new updatedAt date.
-     * @param  {Partial<ThemeProps>} props
-     */
-    update(props: Partial<ThemeProps>) {
-        if (props.name) this._name = props.name
-        if (props.description) this._description = props.description
-        if (props.outcomes) this._outcomes = props.outcomes
         this._updatedAt = new Date()
     }
 
@@ -71,5 +62,17 @@ export class Theme {
      */
     get outcomes(): string[] {
         return this._outcomes
+    }
+
+    /**
+     * Updates the current Theme with the given props and sets a new updatedAt date.
+     * @param  {Partial<ThemeProps>} props
+     */
+    update(props: Partial<ThemeProps>) {
+        const { name, description, outcomes } = props
+        if (name) this._name = name
+        if (description) this._description = description
+        if (outcomes) this._outcomes = outcomes
+        this._updatedAt = new Date()
     }
 }
