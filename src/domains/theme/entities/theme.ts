@@ -2,7 +2,7 @@ import {
     PropValidationError,
     PropValidationResult,
 } from '@shared/prop-validation'
-import { ThemeProps } from '@theme/entities/theme.interface'
+import { ThemeDTO, ThemeProps } from '@theme/entities/theme.interface'
 import { v4 } from 'uuid'
 
 export class Theme {
@@ -83,6 +83,30 @@ export class Theme {
         if (outcomes) this._outcomes = outcomes
         this._updatedAt = new Date()
         return this
+    }
+
+    toDto(): ThemeDTO {
+        return {
+            id: this.id,
+            name: this.name,
+            description: this.description,
+            outcomes: this.outcomes,
+            createdAt: this.createdAt,
+            updatedAt: this.updatedAt,
+        }
+    }
+
+    static fromDTO(dto: ThemeDTO): Theme {
+        const props: ThemeProps = {
+            name: dto.name,
+            description: dto.description,
+            outcomes: dto.outcomes,
+        }
+        const theme = new Theme(props, dto.id)
+        theme._createdAt = dto.createdAt
+        theme._updatedAt = dto.updatedAt
+
+        return theme
     }
 
     /**

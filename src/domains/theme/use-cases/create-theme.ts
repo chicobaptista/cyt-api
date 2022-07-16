@@ -24,7 +24,9 @@ export class CCreateTheme implements CreateTheme {
      */
     public async create(props: ThemeProps): Promise<ThemeDTO> {
         const theme: Theme = new Theme(props)
-        const result: ThemeDTO = await this.themeRepository.saveTheme(theme)
+        const result: ThemeDTO = await this.themeRepository.saveTheme(
+            theme.toDto(),
+        )
         return result
     }
 }

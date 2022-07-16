@@ -1,7 +1,10 @@
 import chai, { expect } from 'chai'
+import {
+    generateMockThemeDto,
+    generateMockThemeProps,
+} from './theme.utils.spec'
 import { Theme } from '@theme/entities/theme'
 import { ThemeProps } from '@theme/entities/theme.interface'
-import { generateMockThemeProps } from './theme.utils.spec'
 import sinonChai from 'sinon-chai'
 chai.use(sinonChai)
 
@@ -130,6 +133,45 @@ describe('Theme Entity', () => {
                         ).to.be.greaterThan(theme.createdAt)
                     }, 10)
                 })
+            })
+        })
+    })
+
+    describe('DTO Utils', () => {
+        describe('From DTO', () => {
+            it('should return a Theme Entity from a ThemeDTO', () => {
+                const themeDto = generateMockThemeDto()
+                const theme = Theme.fromDTO(themeDto)
+
+                expect(theme, 'should be instance of Theme').to.be.instanceOf(
+                    Theme,
+                )
+                expect(theme, 'should have the original dto data').to.contain(
+                    themeDto,
+                )
+            })
+        })
+
+        describe('To DTO', () => {
+            it('should return a ThemeDTO from a Theme Entity', () => {
+                const themeProps = generateMockThemeProps()
+                const theme = new Theme(themeProps)
+                const themeDto = theme.toDto()
+                expect(themeDto, 'should have id property').to.haveOwnProperty(
+                    'id',
+                )
+                expect(
+                    themeDto,
+                    'should have createdAt property',
+                ).to.haveOwnProperty('createdAt')
+                expect(
+                    themeDto,
+                    'should have updatedAt property',
+                ).to.haveOwnProperty('updatedAt')
+                expect(
+                    themeDto,
+                    'should contain original props data',
+                ).to.contain(themeProps)
             })
         })
     })
