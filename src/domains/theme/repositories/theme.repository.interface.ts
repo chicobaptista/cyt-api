@@ -13,5 +13,12 @@ export interface CreateThemeRepository {
 }
 
 export interface ReadThemeRepository {
+    /**
+     * Retrieves a {@link ThemeDTO} from a persistence driver.
+     *
+     * @param  {string} themeId
+     * @returns Promise
+     * @fulfill {@link ThemeDTO}
+     */
     readTheme(themeId: ThemeDTO['id']): Promise<ThemeDTO>
 }
