@@ -22,3 +22,15 @@ export interface ReadTheme {
      */
     read(themeId: string): Promise<ThemeDTO>
 }
+
+export interface UpdateTheme {
+    /**
+     * Updates an existing {@link ThemeDTO} entity from the given props and saves its DTO to the ThemeRepository.
+     *
+     * @param  {string} themeId
+     * @param  {Partial<ThemeProps>} changes
+     * @returns Promise<ThemeDTO>
+     * @fulfill {@link ThemeDTO}
+     */
+    update(themeId: string, changes: Partial<ThemeProps>): Promise<ThemeDTO>
+}
