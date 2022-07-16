@@ -1,4 +1,4 @@
-import { Theme, ThemeProps } from '@theme/entities/theme.interface'
+import { Theme, ThemeDTO, ThemeProps } from '@theme/entities/theme.interface'
 import { CreateTheme } from './use-cases.interface'
 import { CreateThemeRepository } from '@theme/repositories/theme.repository.interface'
 import themeFactory from '@theme/entities'
@@ -16,15 +16,15 @@ export class CCreateTheme implements CreateTheme {
     }
 
     /**
-     * Creates a new {@link Theme} entity with the given props and saves it to the ThemeRepository.
+     * Creates a new {@link Theme} entity with the given props and saves its {@link ThemeDTO} to the ThemeRepository.
      *
      * @param  {ThemeProps} props
      * @returns Promise.<Theme>
-     * @fulfill {@link Theme}
+     * @fulfill {@link ThemeDTO}
      */
-    public async create(props: ThemeProps): Promise<Theme> {
-        const theme = themeFactory.makeTheme(props)
-        await this.themeRepository.saveTheme(theme)
-        return theme
+    public async create(props: ThemeProps): Promise<ThemeDTO> {
+        const theme: Theme = themeFactory.makeTheme(props)
+        const result: ThemeDTO = await this.themeRepository.saveTheme(theme)
+        return result
     }
 }
