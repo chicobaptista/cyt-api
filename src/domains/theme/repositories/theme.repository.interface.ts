@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
-import { ThemeDTO } from '@theme/entities/theme.interface'
+import { ThemeDTO, ThemeProps } from '@theme/entities/theme.interface'
 
 export interface CreateThemeRepository {
     /**
-     * Saves a {@link ThemeDTO} entity to a persistence driver.
+     * Saves a {@link Theme} entity generated from a {@link ThemeProps} param to a persistence driver.
      *
-     * @param  {ThemeDTO} theme
+     * @param  {ThemeProps} theme
      * @returns Promise
      * @fulfill {@link ThemeDTO}
      */
-    saveTheme(theme: ThemeDTO): Promise<ThemeDTO>
+    saveTheme(theme: ThemeProps): Promise<ThemeDTO>
 }
 
 export interface ReadThemeRepository {
