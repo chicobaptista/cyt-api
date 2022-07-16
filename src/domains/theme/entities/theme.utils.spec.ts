@@ -1,4 +1,5 @@
-import { Theme, ThemeDTO, ThemeProps } from './theme.interface'
+import { ThemeDTO, ThemeProps } from './theme.interface'
+import { Theme } from './theme'
 import sinon from 'sinon'
 import { v4 } from 'uuid'
 
@@ -19,7 +20,7 @@ export function generateMockTheme(): Theme {
         createdAt: new Date(),
         updatedAt: new Date(),
         update: sinon.stub(),
-    }
+    } as unknown as Theme
 }
 
 export function generateMockThemeDto(): ThemeDTO {

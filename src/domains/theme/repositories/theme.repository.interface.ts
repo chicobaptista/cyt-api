@@ -9,7 +9,7 @@ export interface CreateThemeRepository {
      * @returns Promise
      * @fulfill {@link ThemeDTO}
      */
-    saveTheme(theme: ThemeProps): Promise<ThemeDTO>
+    saveTheme(theme: ThemeDTO): Promise<ThemeDTO>
 }
 
 export interface ReadThemeRepository {

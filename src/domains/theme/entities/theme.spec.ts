@@ -1,21 +1,13 @@
 import chai, { expect } from 'chai'
-import {
-    makePermissiveThemeValidator,
-    makeRestrictiveCreateThemeValidator,
-    makeRestrictiveUpdateThemeValidator,
-} from './theme.validator.utils.spec'
-import { CTheme } from '@theme/entities/theme'
+import { Theme } from '@theme/entities/theme'
 import { ThemeProps } from '@theme/entities/theme.interface'
-import { ThemeValidator } from '@theme/entities/theme.validator.interface'
 import { generateMockThemeProps } from './theme.utils.spec'
 import sinonChai from 'sinon-chai'
 chai.use(sinonChai)
 
-describe('CTheme Entity', () => {
+describe('Theme Entity', () => {
     describe('New Theme', () => {
         describe('on invalid props', () => {
-            const themeValidator: ThemeValidator =
-                makeRestrictiveCreateThemeValidator()
             const props: ThemeProps = {
                 name: false,
                 description: 0,
@@ -23,17 +15,15 @@ describe('CTheme Entity', () => {
             } as unknown as ThemeProps
 
             it('should throw a validation Error', () => {
-                expect(() => new CTheme(themeValidator, props)).to.throw(
+                expect(() => new Theme(props)).to.throw(
                     'Invalid create new Theme props',
                 )
             })
         })
         describe('On valid props', () => {
-            const themeValidator: ThemeValidator =
-                makePermissiveThemeValidator()
             const props: ThemeProps = generateMockThemeProps()
             it('should be created properly', () => {
-                const theme = new CTheme(themeValidator, props)
+                const theme = new Theme(props)
 
                 expect(theme.name).to.eq(
                     props.name,
@@ -56,10 +46,8 @@ describe('CTheme Entity', () => {
 
     describe('Updated Theme', () => {
         describe('on invalid props', () => {
-            const themeValidator: ThemeValidator =
-                makeRestrictiveUpdateThemeValidator()
             const oldProps: ThemeProps = generateMockThemeProps()
-            const theme = new CTheme(themeValidator, oldProps)
+            const theme = new Theme(oldProps)
             const newProps: ThemeProps = {
                 name: false,
                 description: 0,
@@ -73,10 +61,9 @@ describe('CTheme Entity', () => {
             })
         })
         describe('On valid props', () => {
-            const themeValidator = makePermissiveThemeValidator()
             const oldProps: ThemeProps = generateMockThemeProps()
             describe('updating outcomes', () => {
-                const theme = new CTheme(themeValidator, oldProps)
+                const theme = new Theme(oldProps)
 
                 const newProps: Partial<ThemeProps> = {
                     outcomes: ['New Test Outcome 1', 'New Test Outcome 2'],
@@ -110,7 +97,7 @@ describe('CTheme Entity', () => {
                 })
             })
             describe('updating name and description', () => {
-                const theme = new CTheme(themeValidator, oldProps)
+                const theme = new Theme(oldProps)
 
                 const newProps: Partial<ThemeProps> = {
                     name: 'New Test Theme',

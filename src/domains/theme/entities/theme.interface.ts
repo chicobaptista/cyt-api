@@ -8,29 +8,6 @@ export interface ThemeProps {
     outcomes: string[]
 }
 
-/**
- * The interface for the Theme Entity.
- */
-export interface Theme {
-    /* @property {string} id */
-    id: string
-    /* @property {string} name */
-    name: string
-    /* @property {string} description */
-    description: string
-    /* @property {string[]} outcomes */
-    outcomes: string[]
-    /* @property {Date} createdAt */
-    createdAt: Date
-    /* @property {Date} updatedAt */
-    updatedAt: Date
-    /**
-     * @param  {Partial<ThemeProps>} props
-     * @returns void
-     */
-    update(props: Partial<ThemeProps>): Theme
-}
-
 export interface ThemeDTO {
     /* @property {string} id */
     id: string

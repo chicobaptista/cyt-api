@@ -1,15 +1,16 @@
-import { Theme, ThemeProps } from '@theme/entities/theme.interface'
-import { PropValidationError } from '@shared/prop-validation'
-import { ThemeValidator } from '@theme/entities/theme.validator.interface'
+import {
+    PropValidationError,
+    PropValidationResult,
+} from '@shared/prop-validation'
+import { ThemeProps } from '@theme/entities/theme.interface'
 import { v4 } from 'uuid'
 
-export class CTheme implements Theme {
-    private validator: ThemeValidator
+export class Theme {
     readonly id: string
     private _name: string
     private _description: string
     private _outcomes: string[]
-    readonly _createdAt: Date
+    private _createdAt: Date
     private _updatedAt: Date
     /**
      * Represents the Theme Entity.
@@ -18,13 +19,8 @@ export class CTheme implements Theme {
      * @param  {ThemeProps} props
      * @param  {string=uuid.v4} id
      */
-    constructor(
-        validator: ThemeValidator,
-        props: ThemeProps,
-        id: string = v4(),
-    ) {
-        this.validator = validator
-        const { valid, errors } = this.validator.validateCreateProps(props)
+    constructor(props: ThemeProps, id: string = v4()) {
+        const { valid, errors } = this.validateCreateProps(props)
         if (!valid)
             throw new PropValidationError(
                 'Invalid create new Theme props',
@@ -77,7 +73,7 @@ export class CTheme implements Theme {
      * @param  {Partial<ThemeProps>} props
      */
     update(props: Partial<ThemeProps>): Theme {
-        const { valid, errors } = this.validator.validateUpdateProps(props)
+        const { valid, errors } = this.validateUpdateProps(props)
         if (!valid)
             throw new PropValidationError('Invalid update Theme props', errors)
 
@@ -87,5 +83,78 @@ export class CTheme implements Theme {
         if (outcomes) this._outcomes = outcomes
         this._updatedAt = new Date()
         return this
+    }
+
+    /**
+     * @param  {any} nameProp
+     * @returns {Error|void} If name is not a string returns an Error.
+     */
+    private validateNameProp(nameProp: any): Error | void {
+        if (typeof nameProp !== 'string')
+            return new Error('Name should be a string')
+    }
+
+    /**
+     * @param  {any} descriptionProp
+     * @returns {Error|void} If description is not a string returns an Error.
+     */
+    private validateDescriptionProp(descriptionProp: any): Error | void {
+        if (typeof descriptionProp !== 'string')
+            return new Error('Description should be a string')
+    }
+
+    /**
+     * @param  {any} outcomesProp
+     * @returns {Error|void} If outcomes is not an array of strings returns an Error.
+     */
+    private validateOutcomesProp(outcomesProp: any): Error | void {
+        if (
+            !Array.isArray(outcomesProp) ||
+            outcomesProp.some((o) => typeof o !== 'string')
+        )
+            return new Error('Outcomes must be an array of strings')
+    }
+
+    private validateCreateProps(props: any): PropValidationResult {
+        const errors = []
+        const { name, description, outcomes } = props
+
+        const nameValidationError = this.validateNameProp(name)
+        if (nameValidationError) errors.push(nameValidationError)
+
+        const descriptionValidationError =
+            this.validateDescriptionProp(description)
+        if (descriptionValidationError) errors.push(descriptionValidationError)
+
+        const outcomesValidationError = this.validateOutcomesProp(outcomes)
+        if (outcomesValidationError) errors.push(outcomesValidationError)
+
+        return {
+            valid: errors.length === 0,
+            errors,
+        }
+    }
+
+    private validateUpdateProps(props: any): PropValidationResult {
+        const errors = []
+        const { name, description, outcomes } = props
+
+        const nameValidationError = this.validateNameProp(name)
+        if (name !== undefined && nameValidationError)
+            errors.push(nameValidationError)
+
+        const descriptionValidationError =
+            this.validateDescriptionProp(description)
+        if (description !== undefined && descriptionValidationError)
+            errors.push(descriptionValidationError)
+
+        const outcomesValidationError = this.validateOutcomesProp(outcomes)
+        if (outcomes !== undefined && outcomesValidationError)
+            errors.push(outcomesValidationError)
+
+        return {
+            valid: errors.length === 0,
+            errors,
+        }
     }
 }
