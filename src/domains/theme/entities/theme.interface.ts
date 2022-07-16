@@ -28,5 +28,20 @@ export interface Theme {
      * @param  {Partial<ThemeProps>} props
      * @returns void
      */
-    update(props: Partial<ThemeProps>): void
+    update(props: Partial<ThemeProps>): Theme
+}
+
+export interface ThemeDTO {
+    /* @property {string} id */
+    id: string
+    /* @property {string} name */
+    name: string
+    /* @property {string} description */
+    description: string
+    /* @property {string[]} outcomes */
+    outcomes: string[]
+    /* @property {Date} createdAt */
+    createdAt: Date
+    /* @property {Date} updatedAt */
+    updatedAt: Date
 }

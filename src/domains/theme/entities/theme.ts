@@ -73,10 +73,10 @@ export class CTheme implements Theme {
     }
 
     /**
-     * Updates the current Theme with the given props and sets a new updatedAt date.
+     * Updates the current Theme with the given props, sets a new updatedAt date and returns the updated Entity.
      * @param  {Partial<ThemeProps>} props
      */
-    update(props: Partial<ThemeProps>): void {
+    update(props: Partial<ThemeProps>): Theme {
         const { valid, errors } = this.validator.validateUpdateProps(props)
         if (!valid)
             throw new PropValidationError('Invalid update Theme props', errors)
@@ -86,5 +86,6 @@ export class CTheme implements Theme {
         if (description) this._description = description
         if (outcomes) this._outcomes = outcomes
         this._updatedAt = new Date()
+        return this
     }
 }
