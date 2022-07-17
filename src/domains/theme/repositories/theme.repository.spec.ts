@@ -1,24 +1,32 @@
 import { CThemeRepository } from './theme.repository'
 import { DbDriver } from '@shared/drivers/db.driver.interface'
 import { ThemeDTO } from '@theme/entities/theme.interface'
+import { ThemeRepository } from './theme.repository.interface'
 import driverSpecUtils from '@shared/drivers/db.driver.utils.spec'
 import { expect } from 'chai'
 import { generateMockThemeDto } from '@theme/entities/theme.utils.spec'
 
-describe('Theme Repository', () => {
-    const dbDriver: DbDriver<ThemeDTO> = driverSpecUtils.makeDbStub<ThemeDTO>()
-    const themeRepo = new CThemeRepository(dbDriver)
+describe('Theme Repository', async () => {
+    let dbDriver: DbDriver<ThemeDTO>
+    let themeRepo: ThemeRepository
+
+    let themeId: string
+    before(async () => {
+        dbDriver = await driverSpecUtils.makeDbStub()
+        themeRepo = new CThemeRepository(dbDriver)
+    })
     describe('Save Theme', () => {
         it('should save a theme dto and return it', async () => {
             const themeDto: ThemeDTO = generateMockThemeDto()
             const result = await themeRepo.saveTheme(themeDto)
-            expect(result).to.deep.equal(themeDto)
+            expect(result).to.deep.contain(themeDto)
+            themeId = themeDto.id
         })
     })
 
     describe('Read Theme', () => {
         it('should return a theme dto', async () => {
-            const themeDto = generateMockThemeDto()
+            const themeDto = { ...generateMockThemeDto(), id: themeId }
             const themeProps: Partial<ThemeDTO> = {
                 id: themeDto.id,
                 name: themeDto.name,
@@ -35,9 +43,10 @@ describe('Theme Repository', () => {
             const themeDto: ThemeDTO = {
                 ...generateMockThemeDto(),
                 outcomes: ['New Outcome'],
+                id: themeId,
             }
             const result = await themeRepo.updateTheme(themeDto)
-            expect(result).to.deep.equal(themeDto)
+            expect(result).to.deep.contain(themeDto)
         })
     })
 })

@@ -20,19 +20,17 @@ export class CThemeRepository
     }
 
     async readTheme(themeId: string): Promise<ThemeDTO> {
-        const found = await this.dbDriver.collection().findOne({ id: themeId })
+        const found = await this.dbDriver.findOne(themeId)
         return found
     }
 
     async saveTheme(theme: ThemeDTO): Promise<ThemeDTO> {
-        const createdTheme = await this.dbDriver.collection().create(theme)
+        const createdTheme = await this.dbDriver.save(theme)
         return createdTheme
     }
 
     async updateTheme(theme: ThemeDTO): Promise<ThemeDTO> {
-        const createdTheme = await this.dbDriver
-            .collection()
-            .findOneAndUpdate(theme)
+        const createdTheme = await this.dbDriver.update(theme)
         return createdTheme
     }
 }

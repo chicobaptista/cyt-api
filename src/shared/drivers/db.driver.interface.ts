@@ -1,11 +1,8 @@
-/* eslint-disable no-unused-vars */
-export interface DbDriver<T> {
-    collection(): DbCollectionMethods<T>
-}
+import { BaseDTO } from '@shared/entities/entity.interface'
 
-export interface DbCollectionMethods<T> {
-    find(query: Record<string, any>): Promise<Array<T>>
-    findOne(query: Record<string, any>): Promise<T>
-    create(data: T): Promise<T>
-    findOneAndUpdate(data: T): Promise<T>
+/* eslint-disable no-unused-vars */
+export interface DbDriver<T extends BaseDTO> {
+    findOne(id: string): Promise<T>
+    save(data: T): Promise<T>
+    update(data: T): Promise<T>
 }

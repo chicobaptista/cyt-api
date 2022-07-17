@@ -1,26 +1,18 @@
 /* eslint-disable no-unused-vars */
+import { BaseDTO } from '@shared/entities/entity.interface'
 import { DbDriver } from './db.driver.interface'
 import { generateMockThemeDto } from '@theme/entities/theme.utils.spec'
 import sinon from 'sinon'
 
-function makeDbStub<T>() {
+function makeDbStub<T extends BaseDTO>() {
     return {
-        collection: () => ({
-            find: sinon
-                .stub()
-                .callsFake(({ id }) =>
-                    Promise.resolve([{ ...generateMockThemeDto(), id }]),
-                ),
-            findOne: sinon
-                .stub()
-                .callsFake(({ id }) =>
-                    Promise.resolve({ ...generateMockThemeDto(), id }),
-                ),
-            create: sinon.stub().callsFake((data) => Promise.resolve(data)),
-            findOneAndUpdate: sinon
-                .stub()
-                .callsFake((data) => Promise.resolve(data)),
-        }),
+        findOne: sinon
+            .stub()
+            .callsFake((id) =>
+                Promise.resolve({ ...generateMockThemeDto(), id }),
+            ),
+        save: sinon.stub().callsFake((data) => Promise.resolve(data)),
+        update: sinon.stub().callsFake((data) => Promise.resolve(data)),
     } as unknown as DbDriver<T>
 }
 

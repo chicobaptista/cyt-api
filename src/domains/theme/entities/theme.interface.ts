@@ -1,4 +1,7 @@
 /* eslint-disable no-unused-vars */
+
+import { BaseDTO } from '@shared/entities/entity.interface'
+
 /**
  * The types prop for {@link Theme}.
  */
@@ -8,7 +11,7 @@ export interface ThemeProps {
     outcomes: string[]
 }
 
-export interface ThemeDTO {
+export interface ThemeDTO extends BaseDTO {
     /* @property {string} id */
     id: string
     /* @property {string} name */
