@@ -5,14 +5,21 @@ import sinon from 'sinon'
 
 function makeDbStub<T>() {
     return {
-        collection: (_collectionName: string) => ({
+        collection: () => ({
+            find: sinon
+                .stub()
+                .callsFake(({ id }) =>
+                    Promise.resolve([{ ...generateMockThemeDto(), id }]),
+                ),
             findOne: sinon
                 .stub()
                 .callsFake(({ id }) =>
                     Promise.resolve({ ...generateMockThemeDto(), id }),
                 ),
-            insertOne: sinon.stub().callsFake((data) => Promise.resolve(data)),
-            updateOne: sinon.stub().callsFake((data) => Promise.resolve(data)),
+            create: sinon.stub().callsFake((data) => Promise.resolve(data)),
+            findOneAndUpdate: sinon
+                .stub()
+                .callsFake((data) => Promise.resolve(data)),
         }),
     } as unknown as DbDriver<T>
 }
