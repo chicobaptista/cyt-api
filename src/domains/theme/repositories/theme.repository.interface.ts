@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { ThemeDTO, ThemeProps } from '@theme/entities/theme.interface'
+import { ThemeDTO } from '@theme/entities/theme.interface'
 
 export interface CreateThemeRepository {
     /**
@@ -42,3 +42,8 @@ export interface UpdateThemeRepository {
      */
     updateTheme(theme: ThemeDTO): Promise<ThemeDTO>
 }
+
+export interface ThemeRepository
+    extends ReadThemeRepository,
+        CreateThemeRepository,
+        UpdateThemeRepository {}
