@@ -19,8 +19,15 @@ describe('Read Theme Use Case', () => {
             const readRepo: ReadThemeRepository = makeMockReadThemeRepository()
             const readTheme: ReadTheme = new CReadTheme(readRepo)
             const mockThemeDto = generateMockThemeDto()
+            const mockThemeProps = {
+                id: mockThemeDto.id,
+                name: mockThemeDto.name,
+                description: mockThemeDto.description,
+                outcomes: mockThemeDto.outcomes,
+            }
+
             const foundTheme = await readTheme.read(mockThemeDto.id)
-            expect(foundTheme).to.deep.equal(mockThemeDto)
+            expect(foundTheme).to.deep.contain(mockThemeProps)
         })
     })
 })
