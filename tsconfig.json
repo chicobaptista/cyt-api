@@ -2,10 +2,10 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es6",
+        "outDir": "./build",
         "rootDir": "./",
         "esModuleInterop": true,
-        "strictNullChecks": false,
-        "strictFunctionTypes": false,
+        "baseUrl": ".",
         "paths": {
             "@shared/*": ["./src/shared/*"],
             "@theme/*": ["./src/domains/theme/*"]
