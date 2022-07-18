@@ -7,13 +7,9 @@ const dbCredentials = {
     user: 'cyt-user',
     password: 'cytPwd',
 }
-let connection
-async function makeDbDriver<T extends BaseDTO>(collectionName, schema) {
-    const { user, password } = dbCredentials
-    if (!connection)
-        await mongoose.connect(
-            `mongodb://${user}:${password}@localhost:27017/${dbName}`,
-        )
+const { user, password } = dbCredentials
+mongoose.connect(`mongodb://${user}:${password}@localhost:27017/${dbName}`)
+function makeDbDriver<T extends BaseDTO>(collectionName, schema) {
     return new CMongoDbDriver<T>(collectionName, schema)
 }
 

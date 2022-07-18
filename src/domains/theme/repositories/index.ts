@@ -4,11 +4,13 @@ import { ThemeDTO } from '@theme/entities/theme.interface'
 import driverFactory from '@shared/drivers'
 import { themeSchema } from '@theme/repositories/theme.schema'
 
-async function makeThemeRepository() {
+function makeThemeRepository() {
     const collectionName = 'themes'
 
-    const dbDriver: DbDriver<ThemeDTO> =
-        await driverFactory.makeDbDriver<ThemeDTO>(collectionName, themeSchema)
+    const dbDriver: DbDriver<ThemeDTO> = driverFactory.makeDbDriver<ThemeDTO>(
+        collectionName,
+        themeSchema,
+    )
     return new CThemeRepository(dbDriver)
 }
 

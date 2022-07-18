@@ -16,6 +16,7 @@ export class PostThemeController implements BaseController {
 
     async handle(request: HttpRequest): Promise<HttpResponse> {
         const { body } = request
+        if (!body) throw new Error('Missing request body parameter')
         const props: ThemeProps = {
             name: body.name,
             description: body.description,
