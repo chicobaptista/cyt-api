@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 
+import { HttpMethods } from '@shared/drivers/http.driver.interface'
 import { StatusCodes } from 'http-status-codes'
 export interface BaseController {
     /**
@@ -13,10 +14,13 @@ export interface BaseController {
 }
 
 export interface HttpRequest {
-    headers?: Record<string, any>
-    ip?: string
     body?: Record<string, any>
     query?: Record<string, any>
+    params?: Record<string, any>
+    ip?: string
+    method?: HttpMethods
+    path?: string
+    headers?: Record<string, any>
 }
 
 export interface HttpResponse {
