@@ -2,7 +2,7 @@
     "all": true,
     "check-coverage": true,
     "include": ["src/**/*.ts"],
-    "exclude": ["**/__mocks__/*", "**/*.spec.ts"],
+    "exclude": ["**/__mocks__/*", "**/*.spec.ts", "**/*.schema.ts", "**/index.ts"],
     "branches": [60, 75],
     "lines": [60, 75],
     "functions": [60, 75],
