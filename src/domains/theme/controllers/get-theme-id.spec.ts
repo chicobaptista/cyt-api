@@ -1,0 +1,51 @@
+import { GetThemeByIDController } from './get-theme-id'
+import { HttpRequest } from '@shared/controllers/controller.interface'
+import { ReadTheme } from '@theme/use-cases/use-cases.interface'
+import { expect } from 'chai'
+import { generateMockThemeDto } from '@theme/entities/theme.utils.spec'
+import { generateReadUseCaseStub } from '@theme/use-cases/theme-use-cases.utils.spec'
+
+describe('Get Theme By Id Controller', () => {
+    describe('Handle Get Request', () => {
+        it('should call ReadThemeUseCase.read', async () => {
+            const { getThemeIdController, readThemeUseCase, request } =
+                makeSut()
+            await getThemeIdController.handle(request)
+
+            expect(readThemeUseCase.read).to.have.been.called
+        })
+        it('should return an OK response with a Theme DTO on the body', async () => {
+            const { getThemeIdController, readProps, request } = makeSut()
+            const response = await getThemeIdController.handle(request)
+
+            expect(response.statusCode, 'should have HttpStatus OK').to.equal(
+                200,
+            )
+            expect(response.body).to.deep.contain(readProps)
+        })
+    })
+})
+
+function makeSut() {
+    const readThemeUseCase: ReadTheme = generateReadUseCaseStub()
+    const getThemeIdController: GetThemeByIDController =
+        new GetThemeByIDController(readThemeUseCase)
+    const mockThemeDto = generateMockThemeDto()
+    const request: HttpRequest = {
+        params: { id: mockThemeDto.id },
+    }
+    const readProps = {
+        id: mockThemeDto.id,
+        name: mockThemeDto.name,
+        description: mockThemeDto.description,
+        outcomes: mockThemeDto.outcomes,
+    }
+
+    return {
+        readThemeUseCase,
+        getThemeIdController,
+        mockThemeDto,
+        request,
+        readProps,
+    }
+}

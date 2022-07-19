@@ -14,6 +14,9 @@ themeRouter
     .route(root)
     .post(expressHandler.makeCallback(themeControllerFactory.makePostTheme()))
 
+themeRouter
+    .route(`${root}:id`)
+    .get(expressHandler.makeCallback(themeControllerFactory.makeGetIdTheme()))
 app.use(bodyParser.json())
 
 app.use(themePath, themeRouter)

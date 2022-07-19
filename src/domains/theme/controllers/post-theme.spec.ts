@@ -1,3 +1,4 @@
+import { CreateTheme } from '@theme/use-cases/use-cases.interface'
 import { HttpRequest } from '@shared/controllers/controller.interface'
 import { PostThemeController } from './post-theme'
 import { ThemeProps } from '@theme/entities/theme.interface'
@@ -43,13 +44,12 @@ describe('Post Theme Controller', () => {
 })
 
 function makeSut() {
-    const createThemeUseCase = generateCreateUseCaseStub()
+    const createThemeUseCase: CreateTheme = generateCreateUseCaseStub()
     const postThemeController: PostThemeController = new PostThemeController(
         createThemeUseCase,
     )
     const mockThemeProps: ThemeProps = generateMockThemeProps()
     const request: HttpRequest = {
-        headers: {},
         body: { ...mockThemeProps },
     }
 

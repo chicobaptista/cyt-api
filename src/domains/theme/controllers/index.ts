@@ -1,3 +1,4 @@
+import { GetThemeByIDController } from './get-theme-id'
 import { PostThemeController } from './post-theme'
 import themeUseCaseFactory from '@theme/use-cases/index'
 
@@ -7,4 +8,10 @@ function makePostTheme() {
     return new PostThemeController(createThemeUC)
 }
 
-export default Object.freeze({ makePostTheme })
+function makeGetIdTheme() {
+    const readThemeUC = themeUseCaseFactory.makeReadTheme()
+
+    return new GetThemeByIDController(readThemeUC)
+}
+
+export default Object.freeze({ makePostTheme, makeGetIdTheme })
