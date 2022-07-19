@@ -17,7 +17,6 @@ export class CMongoDbDriver<T extends BaseDTO> implements DbDriver<T> {
     }
 
     findOne(id: string): Promise<T> {
-        console.log('DbDriver > findOne: ', id)
         return this.collection().findById(id).exec()
     }
 
@@ -25,13 +24,10 @@ export class CMongoDbDriver<T extends BaseDTO> implements DbDriver<T> {
         Object.assign(data, {
             _id: data.id,
         })
-        console.log('DbDriver > saveData: ', data)
         return this.collection().create(data)
     }
 
     update(data: T): Promise<T> {
-        console.log('DbDriver > updateData: ', data)
-
         Object.assign(data, { _id: data.id })
         return this.collection()
             .findByIdAndUpdate(data.id, data, {
