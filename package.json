@@ -7,6 +7,7 @@
     "prepare": "husky install",
     "test:unit": "nyc --reporter=text mocha -r ts-node/register  -r tsconfig-paths/register  --recursive './src/**/*.spec.ts'",
     "test:e2e": "mocha --require ts-node/register  -r tsconfig-paths/register --recursive 'test/e2e/*.spec.ts' --exit",
+    "docker:start": "docker compose start",
     "cz": "git-cz",
     "serve": "LOG_ERRORS=true ts-node -r tsconfig-paths/register src/index.ts"
   },
