@@ -141,14 +141,31 @@ describe('Theme Entity', () => {
         describe('From DTO', () => {
             it('should return a Theme Entity from a ThemeDTO', () => {
                 const themeDto = generateMockThemeDto()
-                const theme = Theme.fromDTO(themeDto)
+                const theme = new Theme(themeDto, themeDto.id)
+
+                console.log('dto >', themeDto)
+                console.log('theme >', theme)
 
                 expect(theme, 'should be instance of Theme').to.be.instanceOf(
                     Theme,
                 )
-                expect(theme, 'should have the original dto data').to.contain(
-                    themeDto,
+                expect(theme.name).to.eq(
+                    themeDto.name,
+                    'should have the given name',
                 )
+                expect(theme.description).to.eq(
+                    themeDto.description,
+                    'should have the given description',
+                )
+                expect(theme.outcomes).to.deep.eq(themeDto.outcomes)
+                expect(
+                    theme.createdAt,
+                    'should have a createdAt date',
+                ).to.deep.equal(themeDto.createdAt)
+                expect(
+                    theme.updatedAt,
+                    'should have a updatedAt date',
+                ).to.deep.equal(themeDto.updatedAt)
             })
         })
 

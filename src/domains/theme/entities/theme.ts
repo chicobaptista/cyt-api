@@ -1,8 +1,12 @@
 import {
+    MakeThemeDTO,
+    ThemeDTO,
+    ThemeProps,
+} from '@theme/entities/theme.interface'
+import {
     PropValidationError,
     PropValidationResult,
 } from '@shared/prop-validation'
-import { ThemeDTO, ThemeProps } from '@theme/entities/theme.interface'
 import { v4 } from 'uuid'
 
 export class Theme {
@@ -16,10 +20,10 @@ export class Theme {
      * Represents the Theme Entity.
      * Implements the {@link Theme} interface.
      *
-     * @param  {ThemeProps} props
+     * @param  {MakeThemeDTO} props
      * @param  {string=uuid.v4} id
      */
-    constructor(props: ThemeProps, id: string = v4()) {
+    constructor(props: MakeThemeDTO, id: string = v4()) {
         const { valid, errors } = this.validateCreateProps(props)
         if (!valid)
             throw new PropValidationError(
@@ -72,7 +76,7 @@ export class Theme {
      * Updates the current Theme with the given props, sets a new updatedAt date and returns the updated Entity.
      * @param  {Partial<ThemeProps>} props
      */
-    update(props: Partial<ThemeProps>): Theme {
+    update(props: Partial<ThemeProps>): void {
         const { valid, errors } = this.validateUpdateProps(props)
         if (!valid)
             throw new PropValidationError('Invalid update Theme props', errors)
@@ -82,7 +86,6 @@ export class Theme {
         if (description) this._description = description
         if (outcomes) this._outcomes = outcomes
         this._updatedAt = new Date()
-        return this
     }
 
     toDto(): ThemeDTO {
@@ -94,19 +97,6 @@ export class Theme {
             createdAt: this.createdAt,
             updatedAt: this.updatedAt,
         }
-    }
-
-    static fromDTO(dto: ThemeDTO): Theme {
-        const props: ThemeProps = {
-            name: dto.name,
-            description: dto.description,
-            outcomes: dto.outcomes,
-        }
-        const theme = new Theme(props, dto.id)
-        theme._createdAt = dto.createdAt
-        theme._updatedAt = dto.updatedAt
-
-        return theme
     }
 
     /**

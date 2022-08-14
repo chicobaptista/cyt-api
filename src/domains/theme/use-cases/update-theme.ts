@@ -16,9 +16,9 @@ export class CUpdateTheme implements UpdateTheme {
     ): Promise<ThemeDTO> {
         const found = await this.updateRepository.readTheme(themeId)
         if (!found) throw new Error(`Theme ${themeId} not found`)
-        const theme: Theme = Theme.fromDTO(found)
-        const updated = theme.update(changes)
-        const result = await this.updateRepository.updateTheme(updated.toDto())
+        const theme: Theme = new Theme(found, found.id)
+        theme.update(changes)
+        const result = await this.updateRepository.updateTheme(theme.toDto())
         return result
     }
 }
