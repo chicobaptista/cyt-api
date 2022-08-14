@@ -24,6 +24,7 @@ export class Theme {
      * @param  {string=uuid.v4} id
      */
     constructor(props: MakeThemeDTO, id: string = v4()) {
+        const timestamp = new Date()
         const { valid, errors } = this.validateCreateProps(props)
         if (!valid)
             throw new PropValidationError(
@@ -36,8 +37,8 @@ export class Theme {
         this._name = name
         this._description = description
         this._outcomes = outcomes
-        this._createdAt = new Date()
-        this._updatedAt = new Date()
+        this._createdAt = props.createdAt ?? timestamp
+        this._updatedAt = props.updatedAt ?? timestamp
     }
 
     /**
