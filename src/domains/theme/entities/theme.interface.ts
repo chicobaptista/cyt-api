@@ -11,11 +11,7 @@ export interface ThemeProps {
     outcomes: string[]
 }
 
-export type MakeThemeDTO = Partial<ThemeDTO> & {
-    name: string
-    description: string
-    outcomes: string[]
-}
+export type MakeThemeDTO = Partial<ThemeDTO> & ThemeProps
 
 export interface ThemeDTO extends BaseDTO {
     /* @property {string} id */
