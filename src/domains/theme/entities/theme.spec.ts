@@ -143,9 +143,6 @@ describe('Theme Entity', () => {
                 const themeDto = generateMockThemeDto()
                 const theme = new Theme(themeDto, themeDto.id)
 
-                console.log('dto >', themeDto)
-                console.log('theme >', theme)
-
                 expect(theme, 'should be instance of Theme').to.be.instanceOf(
                     Theme,
                 )

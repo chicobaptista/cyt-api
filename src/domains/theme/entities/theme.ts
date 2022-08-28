@@ -7,6 +7,7 @@ import {
     PropValidationError,
     PropValidationResult,
 } from '@shared/prop-validation'
+import { isString } from '@shared/validators/string.validator'
 import { v4 } from 'uuid'
 
 export class Theme {
@@ -105,8 +106,7 @@ export class Theme {
      * @returns {Error|void} If name is not a string returns an Error.
      */
     private validateNameProp(nameProp: any): Error | void {
-        if (typeof nameProp !== 'string')
-            return new Error('Name should be a string')
+        if (!isString(nameProp)) return new Error('Name should be a string')
     }
 
     /**
@@ -114,7 +114,7 @@ export class Theme {
      * @returns {Error|void} If description is not a string returns an Error.
      */
     private validateDescriptionProp(descriptionProp: any): Error | void {
-        if (typeof descriptionProp !== 'string')
+        if (!isString(descriptionProp))
             return new Error('Description should be a string')
     }
 
@@ -125,7 +125,7 @@ export class Theme {
     private validateOutcomesProp(outcomesProp: any): Error | void {
         if (
             !Array.isArray(outcomesProp) ||
-            outcomesProp.some((o) => typeof o !== 'string')
+            outcomesProp.some((o) => !isString(o))
         )
             return new Error('Outcomes must be an array of strings')
     }
