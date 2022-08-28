@@ -7,6 +7,7 @@ import {
     PropValidationError,
     PropValidationResult,
 } from '@shared/prop-validation'
+import { isArrayOf } from '@shared/validators/array.validator'
 import { isString } from '@shared/validators/string.validator'
 import { v4 } from 'uuid'
 
@@ -123,10 +124,7 @@ export class Theme {
      * @returns {Error|void} If outcomes is not an array of strings returns an Error.
      */
     private validateOutcomesProp(outcomesProp: any): Error | void {
-        if (
-            !Array.isArray(outcomesProp) ||
-            outcomesProp.some((o) => !isString(o))
-        )
+        if (!isArrayOf(outcomesProp, isString))
             return new Error('Outcomes must be an array of strings')
     }
 
