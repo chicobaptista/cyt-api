@@ -38,7 +38,7 @@ describe('isArrayOf', () => {
         expect(isArrayOf([], (_e: any) => false)).to.be.true
         expect(
             isArrayOf(
-                ['foo', { foo: 'bar' }, 1, null, undefined],
+                ['foo', { foo: 'bar' }, 1, null, undefined, new Date()],
                 (_e: any) => true,
             ),
         ).to.be.true
@@ -47,7 +47,7 @@ describe('isArrayOf', () => {
         expect(isArrayOf(['foo'], (_e: any) => false)).to.be.false
         expect(
             isArrayOf(
-                ['foo', { foo: 'bar' }, 1, null, undefined],
+                ['foo', { foo: 'bar' }, 1, new Date(), null, undefined],
                 (e: any) => !!e,
             ),
         ).to.be.false

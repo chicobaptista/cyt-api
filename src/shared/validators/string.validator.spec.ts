@@ -11,6 +11,9 @@ describe('isString', () => {
     it('should return false if argument is a number', () => {
         expect(isString(1)).to.be.false
     })
+    it('should return false if argument is a Date', () => {
+        expect(isString(new Date())).to.be.false
+    })
     it('should return false if argument is an array', () => {
         expect(isString(['foo'])).to.be.false
     })
