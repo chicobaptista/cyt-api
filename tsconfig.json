@@ -2,7 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es6",
-        "outDir": "./build",
+        "outDir": "dist",
         "rootDir": "./",
         "esModuleInterop": true,
         "baseUrl": ".",
@@ -10,5 +10,6 @@
             "@shared/*": ["./src/shared/*"],
             "@theme/*": ["./src/domains/theme/*"]
         }
-    }
+    },
+    "exclude": ["*/**.spec.ts"]
 }
