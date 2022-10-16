@@ -24,7 +24,7 @@ describe("Cortex's Yearly Themes API", () => {
                 expect(res.status).to.equal(500)
             })
         })
-        xdescribe('on valid props', () => {
+        describe('on valid props', () => {
             it('should return a new Theme', async () => {
                 const {
                     body: {
@@ -57,7 +57,7 @@ describe("Cortex's Yearly Themes API", () => {
             })
         })
     })
-    xdescribe('Read the newly created Theme', () => {
+    describe('Read the newly created Theme', () => {
         it('should return the created Theme', async () => {
             const {
                 body: { id, name, description, outcomes, createdAt, updatedAt },
@@ -81,7 +81,7 @@ describe("Cortex's Yearly Themes API", () => {
         })
     })
 
-    xdescribe('Update the created theme', () => {
+    describe('Update the created theme', () => {
         it('should update the same Theme', async () => {
             const {
                 body: { id, name, description, outcomes, createdAt, updatedAt },
@@ -110,7 +110,7 @@ describe("Cortex's Yearly Themes API", () => {
         })
     })
 
-    xdescribe('Read the updated Theme', () => {
+    describe('Read the updated Theme', () => {
         it('should return the updated Theme', async () => {
             const {
                 body: { id, name, description, outcomes, createdAt, updatedAt },
