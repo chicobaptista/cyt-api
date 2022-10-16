@@ -1,6 +1,7 @@
 {
     "all": true,
     "check-coverage": true,
+    "reporter": ["text", "lcov"],
     "include": ["src/**/*.ts"],
     "exclude": ["**/__mocks__/*", "**/*.spec.ts", "**/*.schema.ts", "**/index.ts"],
     "branches": [60, 75],

@@ -5,10 +5,13 @@
   "main": "src/index.ts",
   "scripts": {
     "prepare": "husky install",
-    "test:unit": "nyc --reporter=text mocha -r ts-node/register  -r tsconfig-paths/register  --recursive './src/**/*.spec.ts'",
-    "test:e2e": "mocha --require ts-node/register  -r tsconfig-paths/register --recursive 'test/e2e/*.spec.ts' --exit",
+    "test": "nyc npm run test:all",
+    "test:all": "npm run test:unit && npm run test:e2e",
+    "test:unit": "mocha -r ts-node/register  -r tsconfig-paths/register  --recursive './src/**/*.spec.ts'",
+    "test:e2e": "mocha -r ts-node/register  -r tsconfig-paths/register --recursive 'test/e2e/*.spec.ts' --exit",
     "docker:start": "docker compose start",
     "cz": "git-cz",
+    "build": "tsc",
     "serve": "LOG_ERRORS=true ts-node -r tsconfig-paths/register src/index.ts"
   },
   "author": "Francisco Llamosas Baptista",
