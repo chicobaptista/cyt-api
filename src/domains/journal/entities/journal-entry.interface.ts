@@ -1,6 +1,6 @@
 import { BaseDTO } from '@shared/entities/entity.interface'
 
-export interface JournalEntryDTO extends BaseDTO {
+export interface JournalEntriesSetDTO extends BaseDTO {
     /* @property {string} id */
     id: string
     /* @property {string} name */
@@ -21,7 +21,7 @@ export interface JournalEntryDTO extends BaseDTO {
     updatedAt: Date
 }
 
-export interface JournalEntryProps {
+export interface JournalEntriesSetProps {
     title: string
     date: Date
     smallEntryStart: string
@@ -30,4 +30,5 @@ export interface JournalEntryProps {
     focusEntry: string
 }
 
-export type MakeJournalEntryDTO = Partial<JournalEntryDTO> & JournalEntryProps
+export type MakeJournalEntriesSetDTO = Partial<JournalEntriesSetDTO> &
+    JournalEntriesSetProps
