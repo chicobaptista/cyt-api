@@ -19,7 +19,6 @@ describe('Patch Theme by Id Controller', () => {
             const { request, patchThemeIdController } = makeSut()
 
             const response = await patchThemeIdController.handle(request)
-            console.log(response)
             expect(
                 response.body,
                 'should have changes inside return DTO',
