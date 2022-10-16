@@ -1,9 +1,13 @@
+/* eslint-disable sort-imports */
 import { GetThemeByIDController } from './get-theme-id'
 import { HttpRequest } from '@shared/controllers/controller.interface'
 import { ReadTheme } from '@theme/use-cases/use-cases.interface'
-import { expect } from 'chai'
+import chai, { expect } from 'chai'
 import { generateMockThemeDto } from '@theme/entities/theme.utils.spec'
 import { generateReadUseCaseStub } from '@theme/use-cases/theme-use-cases.utils.spec'
+import chaiAsPromised from 'chai-as-promised'
+
+chai.use(chaiAsPromised)
 
 describe('Get Theme By Id Controller', () => {
     describe('Handle Get Request', () => {
@@ -22,6 +26,30 @@ describe('Get Theme By Id Controller', () => {
                 200,
             )
             expect(response.body).to.deep.contain(readProps)
+        })
+        describe('on missing id param', () => {
+            it('should throw an error', async () => {
+                const { getThemeIdController, request } = makeSut()
+                request.params = {}
+                return expect(
+                    getThemeIdController.handle(request),
+                    'should throw',
+                ).to.eventually.be.rejectedWith(
+                    'Missing or invalid id parameter.',
+                )
+            })
+        })
+        describe('on invalid id param', () => {
+            it('should throw an error', async () => {
+                const { getThemeIdController, request } = makeSut()
+                request.params = { id: 'mockId' }
+                return expect(
+                    getThemeIdController.handle(request),
+                    'should throw',
+                ).to.eventually.be.rejectedWith(
+                    'Missing or invalid id parameter.',
+                )
+            })
         })
     })
 })

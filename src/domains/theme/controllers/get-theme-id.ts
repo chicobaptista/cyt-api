@@ -6,6 +6,7 @@ import {
 import { ReadTheme } from '@theme/use-cases/use-cases.interface'
 import { StatusCodes } from 'http-status-codes'
 import { ThemeDTO } from '@theme/entities/theme.interface'
+import { isUuid } from '@shared/validators/string.validator'
 
 export class GetThemeByIDController implements BaseController {
     private _readThemeUseCase: ReadTheme
@@ -16,7 +17,8 @@ export class GetThemeByIDController implements BaseController {
 
     async handle(request: HttpRequest): Promise<HttpResponse> {
         const { params } = request
-        if (!params) throw new Error('Missing id parameter.')
+        if (!isUuid(params.id))
+            throw new Error('Missing or invalid id parameter.')
         const found: ThemeDTO = await this._readThemeUseCase.read(params.id)
 
         return {
