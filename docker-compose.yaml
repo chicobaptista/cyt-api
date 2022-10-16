@@ -10,3 +10,13 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=cyt-mongo
       - MONGO_INITDB_ROOT_PASSWORD=MySecretPassword
+  cyt-api:
+    image: cyt-api:latest
+    ports:
+      - 5000:5000
+    env_file:
+      - .env
+    environment:
+      - MONGO_HOST=mongodb
+    depends_on:
+      - mongodb
