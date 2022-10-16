@@ -8,7 +8,7 @@ import {
     PropValidationResult,
 } from '@shared/prop-validation'
 import { isArrayOf } from '@shared/validators/array.validator'
-import { isString } from '@shared/validators/string.validator'
+import { isNonEmptyString } from '@shared/validators/string.validator'
 import { v4 } from 'uuid'
 
 export class Theme {
@@ -107,7 +107,8 @@ export class Theme {
      * @returns {Error|void} If name is not a string returns an Error.
      */
     private validateNameProp(nameProp: any): Error | void {
-        if (!isString(nameProp)) return new Error('Name should be a string')
+        if (!isNonEmptyString(nameProp))
+            return new Error('Name should be a valid non-empty string')
     }
 
     /**
@@ -115,8 +116,8 @@ export class Theme {
      * @returns {Error|void} If description is not a string returns an Error.
      */
     private validateDescriptionProp(descriptionProp: any): Error | void {
-        if (!isString(descriptionProp))
-            return new Error('Description should be a string')
+        if (!isNonEmptyString(descriptionProp))
+            return new Error('Description should be a valid non-empty string')
     }
 
     /**
@@ -124,8 +125,10 @@ export class Theme {
      * @returns {Error|void} If outcomes is not an array of strings returns an Error.
      */
     private validateOutcomesProp(outcomesProp: any): Error | void {
-        if (!isArrayOf(outcomesProp, isString))
-            return new Error('Outcomes must be an array of strings')
+        if (!isArrayOf(outcomesProp, isNonEmptyString))
+            return new Error(
+                'Outcomes must be an array of valid non-empty strings',
+            )
     }
 
     private validateCreateProps(props: any): PropValidationResult {
