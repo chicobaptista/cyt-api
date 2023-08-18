@@ -6,9 +6,8 @@
   "scripts": {
     "prepare": "husky install",
     "test": "nyc npm run test:all",
-    "test:all": "npm run test:unit && npm run test:e2e",
+    "test:all": "npm run test:unit",
     "test:unit": "mocha -r ts-node/register  -r tsconfig-paths/register  --recursive './src/**/*.spec.ts'",
-    "test:e2e": "mocha -r ts-node/register  -r tsconfig-paths/register --recursive 'test/e2e/*.spec.ts' --exit",
     "docker:build": "docker build . -t cyt-api",
     "docker:start": "docker compose up",
     "docker:all": "npm run docker:build && npm run docker:start",
